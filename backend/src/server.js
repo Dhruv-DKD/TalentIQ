@@ -7,6 +7,9 @@ app.get("/health", (req, res) => {
   res.status(200).json({ message: "Success from API" });
 });
 
+app.get("/testdemobranchgit", (req, res) => {
+  res.status(200).json({ message: "Success from git branch API" });
+});
 app.listen(ENV.PORT, () => {
   console.log(`Server is running on port ${ENV.PORT}`);
 });
