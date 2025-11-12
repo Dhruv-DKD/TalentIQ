@@ -10,7 +10,7 @@ import {
 const App = () => {
   return (
     <>
-      <h1>Wekcine to the app</h1>
+      <h1>Welcome to the app</h1>
       <SignedOut>
         <SignInButton mode="modal">
           <button>Login</button>
