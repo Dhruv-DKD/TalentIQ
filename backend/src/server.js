@@ -1,6 +1,7 @@
 import express from "express";
 import { ENV } from "./lib/env.js";
 import path from "path";
+import { connectDB } from "./lib/db.js";
 
 const app = express();
 
@@ -12,9 +13,6 @@ app.get("/health", (req, res) => {
 
 app.get("/testdemobranchgit", (req, res) => {
   res.status(200).json({ message: "Success from git branch API" });
-});
-app.listen(ENV.PORT, () => {
-  console.log(`Server is running on port ${ENV.PORT}`);
 });
 
 if (process.env.NODE_ENV === "production") {
@@ -29,5 +27,15 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(staticPath, "index.html"));
   });
 }
+
+connectDB()
+  .then(() => {
+    app.listen(ENV.PORT || 5000, (req, res) => {
+      console.log(`⚙️   Server is running on port ${ENV.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MONGODB CONNECTION FAILED (server.js) !!", err);
+  });
 
 export default app;
