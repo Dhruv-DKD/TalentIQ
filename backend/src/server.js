@@ -30,6 +30,12 @@ if (process.env.NODE_ENV === "production") {
 
 connectDB()
   .then(() => {
+    console.log(
+      "INNGEST_SIGNING_KEY loaded:",
+      !!process.env.INNGEST_SIGNING_KEY
+    );
+    console.log("INNGEST_EVENT_KEY loaded:", !!process.env.INNGEST_EVENT_KEY);
+
     app.listen(ENV.PORT || 5000, (req, res) => {
       console.log(`⚙️   Server is running on port ${ENV.PORT}`);
     });
