@@ -25,16 +25,11 @@ app.get("/testdemobranchgit", (req, res) => {
   res.status(200).json({ message: "Success from git branch API" });
 });
 
-if (process.env.NODE_ENV === "production") {
-  const staticPath = path.join(__dirname, "../frontend/dist");
-  console.log("🧭 Static path:", staticPath);
+if (ENV.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.use(express.static(staticPath));
-
-  // React Router fallback
-  // ✅ Works in Express 5+
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
+  app.get("/{*any}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
 
