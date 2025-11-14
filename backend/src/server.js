@@ -18,10 +18,13 @@ app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); // this adds auth field to request object : req.auth()
 
+
 import chatRoutes from "./routes/chat.route.js";
+import sessionRoutes from "./routes/session.route.js";
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
+app.use("/api/sessions", sessionRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Success from API" });
