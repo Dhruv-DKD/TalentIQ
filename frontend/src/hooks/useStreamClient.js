@@ -34,7 +34,7 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
 
         setStreamClient(client);
 
-        videoCall = client.call("default_multi_party", session.callId);
+        videoCall = client.call("development", session.callId);
         await videoCall.join({ create: true });
         setCall(videoCall);
 
